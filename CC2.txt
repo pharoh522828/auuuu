@@ -1,0 +1,23 @@
+    Make sure you have python installed in your ubuntu system. run the command “python -V” and most probably you will get “Python 2.7.6” or above.
+    Crul https://sdk.cloud.google.com and use bash to run the commands by typing this command curl https://sdk.cloud.google.com | bash
+    Whenever you get to choose directories just hit enter, “YEAH IT WILL BE FINE”.
+    Follow the instructions in the installation process.
+    Then run gcloud init
+    Follow the installation instructions as they are very straight forward.
+    Choose the account you want to use for google app engine.
+    Choose the project with numeric choice (don’t use textual, you might make mistake). If you do not already have a google app engine project create a app engine project by following this link. https://console.cloud.google.com/start
+    Enable google api by pressing Y in the command line prompt.
+
+Now as we have finished installing appengine, now it’s time to create and upload an app. In this case we will be taking example of a “HELLO WORLD” app in python.
+
+    As we already have made sure that we have python installed in our system, It will be easier for us to clone existing code and deploy it rather than creating our own so we will use python-docs-sample. Run the command “git clone https://github.com/GoogleCloudPlatform/python-docs-samples”.
+    cd to hello world sample by typing the command “ cd python-docs-samples/appengine/standard/hello_world”.
+    Then run the command “dev_appserver.py app.yaml”. It will run and give you the url of default and admin. If you go to the link of default you see the text hello world like this.
+
+This is how you run the python app in your local server. But what we have to do is hosting the app in google app engine. To do so Now let’s follow the following instructions.
+
+    Run the command Ctrl + C .
+    Being in the same working directory hello-world runt he command
+    gcloud app deploy
+    Select the project you want to deploy the app , press Y and enter to continue. after that you will get the console output “Deployed service[default] to [Your web url for appengine] ”
+    If you copy and paste the url, you will see the hello world in the browser too.

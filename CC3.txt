@@ -1,0 +1,63 @@
+## CREATING RECORDS ONE BY ONE
+Account acc1 = new Account(Name='Johnny Harris', Phone='123456');
+Account acc2 = new Account(Name='Joe Scott', Phone='123456');
+insert acc1;
+insert acc2;
+
+## CREATING MULTIPLE ACCOUNTS USING LIST
+List<Account> accList =new List<Account>();
+Account acc3= new Account(Name='Vsauce',Phone='123456');
+Account acc4= new Account(Name='MKBHD',Phone='123456');
+accList.add(acc3);
+accList.add(acc4);
+insert accList;
+
+
+## UPDATION OF RECORDS:
+Account acc = [SELECT Id,Name,Phone FROM Account Where Name='MKBHD'];
+System.debug('acc =>'+acc);
+
+acc.phone='654321';
+update acc;
+Account updatedAcc=  [SELECT Id,Name,Phone FROM Account Where Name='MKBHD'];
+System.assertEquals(updatedAcc.phone, acc.phone, 'equal');
+
+## UPSERT(Create a new one as well as update the existing one simultaneously)
+
+List<Account> accList = new List<Account>();
+Account acc5= new Account(Name='Nexpo',Phone='738382');
+Account acc6= [SELECT Id, Name, Phone FROM Account WHERE Name='Johnny Harris'];
+
+acc6.Phone='727348';
+accList.add(acc5);
+accList.add(acc6);
+upsert accList;
+
+## MERGING OF TWO ACCOUNTS
+
+Account masterAcc = [SELECT Id, Name, Phone FROM Account WHERE Name='Nexpo'];
+Account mergeAcc =[SELECT Id, Name, Phone FROM Account WHERE Name='MKBHD'];
+
+merge masterAcc mergeAcc;
+
+## DELETION OF RECORDS
+
+List<Account> acc=[SELECT Id, Name, Phone FROM Account WHERE Name='Nexpo'];
+delete acc;
+
+## UNDELETE RECORDS
+
+List<Account> deletedAcc=[SELECT Id, Name, Phone FROM Account WHERE Name='Nexpo'ALL ROWS];
+
+undelete deletedAcc;
+
+## EXCEPTION HANDLING USING TRY AND CATCH BLOCK
+
+try{
+    Account acc = new Account();
+    insert acc;
+}
+catch(DMLException e){
+    System.debug('Error =>' + e.getMessage());
+}
+    
